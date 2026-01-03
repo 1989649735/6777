@@ -1,0 +1,187 @@
+/* 主题样式文件 */
+
+/* 浅色主题 */
+.light-theme {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.light-theme .mode-btn {
+    background-color: #f0f0f0;
+    color: #333333;
+    border: 2px solid #dddddd;
+}
+
+.light-theme .mode-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #4CAF50;
+}
+
+.light-theme #guess-input-area,
+.light-theme #guess-history,
+.light-theme .stat-item,
+.light-theme #achievements-header,
+.light-theme .achievement-card,
+.light-theme .setting-group {
+    background-color: #f8f9fa;
+}
+
+.light-theme .achievement-card.unlocked {
+    background-color: #e8f5e8;
+}
+
+.light-theme .achievement-card.hidden {
+    background-color: #f0f0f0;
+}
+
+.light-theme #result-achievements {
+    background-color: #f8f9fa;
+}
+
+.light-theme #history-list li {
+    background-color: white;
+    border-left: 4px solid #4CAF50;
+}
+
+.light-theme .setting-item {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.light-theme .setting-group h3 {
+    border-bottom: 1px solid #dddddd;
+}
+
+/* 深色主题 */
+.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-theme #game-container {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dark-theme button:hover {
+    background-color: #45a049;
+}
+
+.dark-theme button:disabled {
+    background-color: #333333;
+    color: #666666;
+}
+
+.dark-theme .mode-btn {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 2px solid #333333;
+}
+
+.dark-theme .mode-btn:hover {
+    background-color: #2a2a2a;
+    border-color: #4CAF50;
+}
+
+.dark-theme #guess-input-area,
+.dark-theme #guess-history,
+.dark-theme .stat-item,
+.dark-theme #achievements-header,
+.dark-theme .achievement-card,
+.dark-theme .setting-group {
+    background-color: #1e1e1e;
+}
+
+.dark-theme .achievement-card.unlocked {
+    background-color: #1a2e1a;
+    border-color: #4CAF50;
+}
+
+.dark-theme .achievement-card.hidden {
+    background-color: #222222;
+}
+
+.dark-theme #result-achievements {
+    background-color: #1e1e1e;
+}
+
+.dark-theme #history-list li {
+    background-color: #2a2a2a;
+    border-left: 4px solid #4CAF50;
+}
+
+.dark-theme .setting-item {
+    border-bottom: 1px solid #333333;
+}
+
+.dark-theme .setting-group h3 {
+    border-bottom: 1px solid #333333;
+}
+
+.dark-theme input,
+.dark-theme select {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333333;
+}
+
+.dark-theme input:focus,
+.dark-theme select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.dark-theme .number-input,
+.dark-theme .code-input {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 2px solid #333333;
+}
+
+.dark-theme .number-input:focus,
+.dark-theme .code-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* 反馈主题适配 */
+.dark-theme #feedback.success {
+    background-color: #1a2e1a;
+    color: #81c784;
+    border: 1px solid #2e7d32;
+}
+
+.dark-theme #feedback.error {
+    background-color: #3d1e1e;
+    color: #e57373;
+    border: 1px solid #c62828;
+}
+
+.dark-theme #feedback.info {
+    background-color: #1e333d;
+    color: #64b5f6;
+    border: 1px solid #1565c0;
+}
+
+/* 主题切换过渡动画 */
+#game-container {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button,
+.mode-btn,
+.stat-item,
+.achievement-card,
+.setting-group,
+#guess-input-area,
+#guess-history,
+#achievements-header,
+#result-achievements,
+#history-list li,
+input,
+select {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

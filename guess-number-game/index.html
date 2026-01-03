@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字游戏 - 单人本地增强版</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div id="game-container" class="light-theme">
+        <!-- 主菜单 -->
+        <div id="main-menu" class="screen active">
+            <h1>猜数字游戏</h1>
+            <div id="mode-selection">
+                <h2>选择游戏模式</h2>
+                <div class="mode-grid">
+                    <button class="mode-btn" data-mode="classic">
+                        <h3>经典模式</h3>
+                        <p>传统的猜数字游戏</p>
+                    </button>
+                    <button class="mode-btn" data-mode="multi">
+                        <h3>多数字组合</h3>
+                        <p>同时猜测多个数字</p>
+                    </button>
+                    <button class="mode-btn" data-mode="math">
+                        <h3>数学运算</h3>
+                        <p>通过运算接近目标</p>
+                    </button>
+                    <button class="mode-btn" data-mode="reverse">
+                        <h3>反向提示</h3>
+                        <p>通过特殊提示推理目标</p>
+                    </button>
+                    <button class="mode-btn" data-mode="dynamic">
+                        <h3>动态目标</h3>
+                        <p>目标数字会随机变化</p>
+                    </button>
+                    <button class="mode-btn" data-mode="code">
+                        <h3>密码破译</h3>
+                        <p>猜数字和位置</p>
+                    </button>
+                </div>
+            </div>
+            <div id="menu-options">
+                <button id="stats-btn">统计信息</button>
+                <button id="achievements-btn">成就</button>
+                <button id="settings-btn">设置</button>
+            </div>
+        </div>
+
+        <!-- 难度选择 -->
+        <div id="difficulty-selection" class="screen">
+            <h2>选择难度</h2>
+            <div class="difficulty-grid">
+                <button class="difficulty-btn" data-difficulty="简单">简单</button>
+                <button class="difficulty-btn" data-difficulty="中等">中等</button>
+                <button class="difficulty-btn" data-difficulty="困难">困难</button>
+                <button class="difficulty-btn" data-difficulty="专家">专家</button>
+            </div>
+            <button id="back-to-menu">返回主菜单</button>
+        </div>
+
+        <!-- 游戏界面 -->
+        <div id="game-screen" class="screen">
+            <div id="game-header">
+                <h2 id="game-mode-name">经典模式</h2>
+                <div id="game-info">
+                    <span id="attempts">尝试次数: 0/10</span>
+                    <span id="timer">时间: 00:00</span>
+                </div>
+            </div>
+            
+            <div id="game-content">
+                <div id="feedback" class="info"></div>
+                
+                <div id="guess-input-area">
+                    <div id="input-container">
+                        <!-- 输入控件将根据游戏模式动态生成 -->
+                    </div>
+                    <div id="game-buttons">
+                        <button id="submit-guess">提交猜测</button>
+                        <button id="get-hint">获取提示</button>
+                        <button id="save-game">保存游戏</button>
+                        <button id="quit-game">退出游戏</button>
+                    </div>
+                </div>
+                
+                <div id="guess-history">
+                    <h3>猜测历史</h3>
+                    <ul id="history-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏结束界面 -->
+        <div id="game-over" class="screen">
+            <div id="game-result"></div>
+            <div id="result-stats"></div>
+            <div id="result-achievements"></div>
+            <div id="game-over-buttons">
+                <button id="play-again">再玩一次</button>
+                <button id="back-to-main">返回主菜单</button>
+            </div>
+        </div>
+
+        <!-- 统计信息 -->
+    <div id="stats-screen" class="screen">
+        <h2>统计信息</h2>
+        <div id="stats-container">
+            <!-- 基本统计 -->
+            <h3>基本统计</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">总游戏数:</span>
+                    <span id="total-games">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">胜利数:</span>
+                    <span id="total-wins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">失败数:</span>
+                    <span id="total-losses">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">胜率:</span>
+                    <span id="win-rate">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">最高连胜:</span>
+                    <span id="max-streak">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">当前连胜:</span>
+                    <span id="current-streak">0</span>
+                </div>
+            </div>
+            
+            <!-- 尝试次数统计 -->
+            <h3>尝试次数统计</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">平均尝试次数:</span>
+                    <span id="avg-attempts">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">平均胜利尝试次数:</span>
+                    <span id="avg-win-attempts">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">平均失败尝试次数:</span>
+                    <span id="avg-loss-attempts">0</span>
+                </div>
+            </div>
+            
+            <!-- 时间统计 -->
+            <h3>时间统计</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">最快胜利时间:</span>
+                    <span id="fastest-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">最慢胜利时间:</span>
+                    <span id="slowest-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">平均胜利时间:</span>
+                    <span id="avg-win-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">总游戏时间:</span>
+                    <span id="total-game-time">00:00</span>
+                </div>
+            </div>
+            
+            <!-- 模式统计 -->
+            <h3>模式统计</h3>
+            <div id="mode-stats-container"></div>
+        </div>
+        <button id="back-from-stats">返回主菜单</button>
+    </div>
+
+        <!-- 成就界面 -->
+        <div id="achievements-screen" class="screen">
+            <h2>成就</h2>
+            <div id="achievements-header">
+                <span>已解锁: <span id="unlocked-count">0</span>/<span id="total-achievements">0</span></span>
+                <span>总点数: <span id="total-points">0</span></span>
+            </div>
+            <div id="achievements-grid"></div>
+            <button id="back-from-achievements">返回主菜单</button>
+        </div>
+
+        <!-- 设置面板 -->
+        <div id="settings-screen" class="screen">
+            <h2>设置</h2>
+            <form id="settings-form">
+                <div class="setting-group">
+                    <h3>游戏设置</h3>
+                    <div class="setting-item">
+                        <label for="default-difficulty">默认难度:</label>
+                        <select id="default-difficulty">
+                            <option value="简单">简单</option>
+                            <option value="中等" selected>中等</option>
+                            <option value="困难">困难</option>
+                            <option value="专家">专家</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="hints-enabled">启用提示:</label>
+                        <input type="checkbox" id="hints-enabled" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label for="max-hints">每局最大提示数:</label>
+                        <input type="number" id="max-hints" min="0" max="10" value="3">
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>界面设置</h3>
+                    <div class="setting-item">
+                        <label for="theme">主题:</label>
+                        <select id="theme">
+                            <option value="light" selected>浅色</option>
+                            <option value="dark">深色</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="sound-enabled">启用音效:</label>
+                        <input type="checkbox" id="sound-enabled" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label for="animations-enabled">启用动画:</label>
+                        <input type="checkbox" id="animations-enabled" checked>
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>数据管理</h3>
+                    <button type="button" id="export-data">导出数据</button>
+                    <button type="button" id="import-data">导入数据</button>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                    <button type="button" id="reset-data">重置数据</button>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="button" id="save-settings">保存设置</button>
+                    <button type="button" id="back-from-settings">返回主菜单</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/ConfigManager.js"></script>
+    <script src="js/StorageManager.js"></script>
+    <script src="js/GameEngine.js"></script>
+    <script src="js/AchievementSystem.js"></script>
+    <script src="js/UIManager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
