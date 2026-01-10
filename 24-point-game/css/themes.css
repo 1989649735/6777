@@ -1,0 +1,521 @@
+/* 主题样式文件 */
+
+/* 主题变量定义 */
+:root {
+    /* 浅色主题（默认） */
+    --light-background: #f0f0f0;
+    --light-container: #ffffff;
+    --light-text: #333333;
+    --light-text-secondary: #666666;
+    --light-primary: #4a90e2;
+    --light-secondary: #50e3c2;
+    --light-accent: #f5a623;
+    --light-error: #e74c3c;
+    --light-success: #2ecc71;
+    --light-border: #e0e0e0;
+    --light-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --light-button-hover: rgba(74, 144, 226, 0.1);
+    
+    /* 深色主题 */
+    --dark-background: #121212;
+    --dark-container: #1e1e1e;
+    --dark-text: #ffffff;
+    --dark-text-secondary: #b0b0b0;
+    --dark-primary: #4a90e2;
+    --dark-secondary: #50e3c2;
+    --dark-accent: #f5a623;
+    --dark-error: #e74c3c;
+    --dark-success: #2ecc71;
+    --dark-border: #333333;
+    --dark-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    --dark-button-hover: rgba(74, 144, 226, 0.2);
+    
+    /* 霓虹灯主题 */
+    --neon-background: #0a0a2a;
+    --neon-container: #1a1a4a;
+    --neon-text: #ffffff;
+    --neon-text-secondary: #b0b0ff;
+    --neon-primary: #00ffff;
+    --neon-secondary: #ff00ff;
+    --neon-accent: #ffff00;
+    --neon-error: #ff0055;
+    --neon-success: #00ff55;
+    --neon-border: #3333ff;
+    --neon-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    --neon-button-hover: rgba(0, 255, 255, 0.1);
+}
+
+/* 浅色主题 */
+.light-theme {
+    --background-color: var(--light-background);
+    --container-background: var(--light-container);
+    --text-color: var(--light-text);
+    --text-secondary: var(--light-text-secondary);
+    --primary-color: var(--light-primary);
+    --secondary-color: var(--light-secondary);
+    --accent-color: var(--light-accent);
+    --error-color: var(--light-error);
+    --success-color: var(--light-success);
+    --border-color: var(--light-border);
+    --shadow: var(--light-shadow);
+    --button-hover: var(--light-button-hover);
+}
+
+/* 深色主题 */
+.dark-theme {
+    --background-color: var(--dark-background);
+    --container-background: var(--dark-container);
+    --text-color: var(--dark-text);
+    --text-secondary: var(--dark-text-secondary);
+    --primary-color: var(--dark-primary);
+    --secondary-color: var(--dark-secondary);
+    --accent-color: var(--dark-accent);
+    --error-color: var(--dark-error);
+    --success-color: var(--dark-success);
+    --border-color: var(--dark-border);
+    --shadow: var(--dark-shadow);
+    --button-hover: var(--dark-button-hover);
+}
+
+/* 霓虹灯主题 */
+.neon-theme {
+    --background-color: var(--neon-background);
+    --container-background: var(--neon-container);
+    --text-color: var(--neon-text);
+    --text-secondary: var(--neon-text-secondary);
+    --primary-color: var(--neon-primary);
+    --secondary-color: var(--neon-secondary);
+    --accent-color: var(--neon-accent);
+    --error-color: var(--neon-error);
+    --success-color: var(--neon-success);
+    --border-color: var(--neon-border);
+    --shadow: var(--neon-shadow);
+    --button-hover: var(--neon-button-hover);
+}
+
+/* 主题特定样式 */
+
+/* 深色主题特定样式 */
+.dark-theme body {
+    background-color: var(--dark-background);
+    color: var(--dark-text);
+}
+
+.dark-theme #game-container {
+    background-color: var(--dark-container);
+}
+
+.dark-theme .number {
+    background-color: var(--dark-primary);
+    color: var(--dark-text);
+    box-shadow: var(--dark-shadow);
+}
+
+.dark-theme #expression-input {
+    background-color: var(--dark-container);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.dark-theme .stat-item {
+    background-color: var(--dark-container);
+    box-shadow: var(--dark-shadow);
+}
+
+.dark-theme .achievement-item {
+    background-color: var(--dark-container);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+.dark-theme .setting-item {
+    background-color: var(--dark-container);
+    box-shadow: var(--dark-shadow);
+}
+
+.dark-theme .leaderboard-item {
+    background-color: var(--dark-container);
+    box-shadow: var(--dark-shadow);
+}
+
+/* 霓虹灯主题特定样式 */
+.neon-theme body {
+    background-color: var(--neon-background);
+    color: var(--neon-text);
+}
+
+.neon-theme #game-container {
+    background-color: var(--neon-container);
+    box-shadow: var(--neon-shadow);
+}
+
+.neon-theme h1 {
+    color: var(--neon-primary);
+    text-shadow: 0 0 10px var(--neon-primary), 0 0 20px var(--neon-primary);
+}
+
+.neon-theme h2, .neon-theme h3 {
+    color: var(--neon-secondary);
+    text-shadow: 0 0 5px var(--neon-secondary);
+}
+
+.neon-theme .number {
+    background-color: var(--neon-primary);
+    color: var(--neon-background);
+    box-shadow: 0 0 10px var(--neon-primary), 0 0 20px var(--neon-primary);
+    border: 2px solid var(--neon-primary);
+}
+
+.neon-theme .number:hover {
+    box-shadow: 0 0 15px var(--neon-primary), 0 0 30px var(--neon-primary), 0 0 45px var(--neon-primary);
+    transform: scale(1.15);
+}
+
+.neon-theme button {
+    background-color: var(--neon-secondary);
+    color: var(--neon-background);
+    box-shadow: 0 0 5px var(--neon-secondary), 0 0 10px var(--neon-secondary);
+    border: 2px solid var(--neon-secondary);
+}
+
+.neon-theme button:hover {
+    background-color: var(--neon-accent);
+    box-shadow: 0 0 10px var(--neon-accent), 0 0 20px var(--neon-accent);
+    border-color: var(--neon-accent);
+    transform: translateY(-3px);
+}
+
+.neon-theme #expression-input {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--neon-text);
+    border: 2px solid var(--neon-primary);
+    box-shadow: 0 0 5px var(--neon-primary);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.neon-theme #expression-input:focus {
+    outline: none;
+    border-color: var(--neon-accent);
+    box-shadow: 0 0 10px var(--neon-accent);
+}
+
+.neon-theme #feedback {
+    border: 2px solid var(--neon-primary);
+    box-shadow: 0 0 10px var(--neon-primary);
+}
+
+.neon-theme #feedback.success {
+    border-color: var(--neon-success);
+    box-shadow: 0 0 10px var(--neon-success);
+}
+
+.neon-theme #feedback.error {
+    border-color: var(--neon-error);
+    box-shadow: 0 0 10px var(--neon-error);
+}
+
+.neon-theme .stat-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--neon-primary);
+    box-shadow: var(--neon-shadow);
+}
+
+.neon-theme .achievement-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--neon-border);
+    box-shadow: var(--neon-shadow);
+}
+
+.neon-theme .achievement-item.unlocked {
+    border-color: var(--neon-success);
+    box-shadow: 0 0 15px var(--neon-success);
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.neon-theme .setting-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--neon-primary);
+    box-shadow: var(--neon-shadow);
+}
+
+.neon-theme .leaderboard-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--neon-primary);
+    box-shadow: var(--neon-shadow);
+}
+
+.neon-theme .leaderboard-item:nth-child(1) {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px #ffd700;
+}
+
+.neon-theme .leaderboard-item:nth-child(2) {
+    border-color: #c0c0c0;
+    box-shadow: 0 0 15px #c0c0c0;
+}
+
+.neon-theme .leaderboard-item:nth-child(3) {
+    border-color: #cd7f32;
+    box-shadow: 0 0 15px #cd7f32;
+}
+
+.neon-theme #progress-bar {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--neon-primary);
+}
+
+.neon-theme #progress-fill {
+    background-color: var(--neon-success);
+    box-shadow: 0 0 10px var(--neon-success);
+}
+
+/* 主题过渡效果 */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 主题切换动画 */
+.theme-transition {
+    animation: themeFade 0.5s ease;
+}
+
+@keyframes themeFade {
+    0% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 主题特定的滚动条样式 */
+
+/* 浅色主题滚动条 */
+.light-theme ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.light-theme ::-webkit-scrollbar-track {
+    background: var(--light-border);
+    border-radius: 4px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb {
+    background: var(--light-primary);
+    border-radius: 4px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb:hover {
+    background: var(--light-secondary);
+}
+
+/* 深色主题滚动条 */
+.dark-theme ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+    background: var(--dark-border);
+    border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+    background: var(--dark-primary);
+    border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-secondary);
+}
+
+/* 霓虹灯主题滚动条 */
+.neon-theme ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.neon-theme ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    border: 1px solid var(--neon-primary);
+}
+
+.neon-theme ::-webkit-scrollbar-thumb {
+    background: var(--neon-primary);
+    border-radius: 4px;
+    box-shadow: 0 0 5px var(--neon-primary);
+}
+
+.neon-theme ::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-accent);
+    box-shadow: 0 0 10px var(--neon-accent);
+}
+
+/* 主题特定的输入框样式 */
+
+.light-theme input[type="text"],
+.light-theme input[type="number"],
+.light-theme select {
+    background-color: var(--light-container);
+    color: var(--light-text);
+    border-color: var(--light-border);
+}
+
+.dark-theme input[type="text"],
+.dark-theme input[type="number"],
+.dark-theme select {
+    background-color: var(--dark-container);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.neon-theme input[type="text"],
+.neon-theme input[type="number"],
+.neon-theme select {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--neon-text);
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 5px var(--neon-primary);
+}
+
+.neon-theme input[type="text"]:focus,
+.neon-theme input[type="number"]:focus,
+.neon-theme select:focus {
+    outline: none;
+    border-color: var(--neon-accent);
+    box-shadow: 0 0 10px var(--neon-accent);
+}
+
+/* 主题特定的按钮样式 */
+
+.light-theme button {
+    background-color: var(--light-primary);
+    color: white;
+    box-shadow: var(--light-shadow);
+}
+
+.light-theme button:hover {
+    background-color: #3a7bc8;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme button {
+    background-color: var(--dark-primary);
+    color: white;
+    box-shadow: var(--dark-shadow);
+}
+
+.dark-theme button:hover {
+    background-color: #3a7bc8;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.neon-theme button {
+    background-color: var(--neon-primary);
+    color: var(--neon-background);
+    box-shadow: 0 0 10px var(--neon-primary);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.neon-theme button:hover {
+    background-color: var(--neon-secondary);
+    box-shadow: 0 0 20px var(--neon-secondary);
+    transform: translateY(-2px);
+}
+
+.neon-theme button:active {
+    background-color: var(--neon-accent);
+    box-shadow: 0 0 25px var(--neon-accent);
+    transform: translateY(0);
+}
+
+/* 主题特定的反馈信息样式 */
+
+.light-theme #feedback.info {
+    background-color: var(--light-primary);
+    color: white;
+}
+
+.dark-theme #feedback.info {
+    background-color: var(--dark-primary);
+    color: white;
+}
+
+.neon-theme #feedback.info {
+    background-color: var(--neon-primary);
+    color: var(--neon-background);
+    box-shadow: 0 0 15px var(--neon-primary);
+    border: 2px solid var(--neon-primary);
+}
+
+/* 主题特定的进度条样式 */
+
+.light-theme #progress-fill {
+    background-color: var(--light-success);
+}
+
+.dark-theme #progress-fill {
+    background-color: var(--dark-success);
+}
+
+.neon-theme #progress-fill {
+    background-color: var(--neon-success);
+    box-shadow: 0 0 15px var(--neon-success);
+}
+
+/* 主题特定的模式选择样式 */
+
+.light-theme .mode-btn {
+    background-color: var(--light-container);
+    border-color: var(--light-primary);
+    color: var(--light-text);
+    box-shadow: var(--light-shadow);
+}
+
+.light-theme .mode-btn:hover {
+    background-color: var(--light-button-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .mode-btn {
+    background-color: var(--dark-container);
+    border-color: var(--dark-primary);
+    color: var(--dark-text);
+    box-shadow: var(--dark-shadow);
+}
+
+.dark-theme .mode-btn:hover {
+    background-color: var(--dark-button-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.neon-theme .mode-btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: var(--neon-primary);
+    color: var(--neon-text);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.neon-theme .mode-btn:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    border-color: var(--neon-accent);
+}
+
+.neon-theme .mode-btn h3 {
+    color: var(--neon-primary);
+    text-shadow: 0 0 5px var(--neon-primary);
+}
+
+.neon-theme .mode-btn p {
+    color: var(--neon-text-secondary);
+}

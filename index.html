@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏集合</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .game-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: #4a90e2;
+        }
+        
+        .game-card h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .game-card p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .game-card a {
+            display: inline-block;
+            background: white;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card a:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 游戏集合 🎮</h1>
+        <div class="game-grid">
+            <div class="game-card">
+                <h2>24点游戏</h2>
+                <p>使用给定的四个数字，通过加减乘除运算得到24</p>
+                <a href="24-point-game/index.html" target="_blank">开始游戏</a>
+            </div>
+            
+            <div class="game-card">
+                <h2>猜数字游戏</h2>
+                <p>猜测随机生成的数字，挑战你的推理能力</p>
+                <a href="guess-number-game/index.html" target="_blank">开始游戏</a>
+            </div>
+            
+            <div class="game-card">
+                <h2>扫雷游戏</h2>
+                <p>经典的扫雷游戏，考验你的逻辑思维</p>
+                <a href="minesweeper/index.html" target="_blank">开始游戏</a>
+            </div>
+            
+            <div class="game-card">
+                <h2>俄罗斯方块</h2>
+                <p>经典的俄罗斯方块游戏，挑战你的反应速度</p>
+                <a href="tetris/index.html" target="_blank">开始游戏</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2024 游戏集合 - 持续更新中...</p>
+    </div>
+</body>
+</html>

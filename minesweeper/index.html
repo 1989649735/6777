@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫雷游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>扫雷游戏</h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">剩余地雷:</span>
+                    <span class="stat-value" id="mine-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">时间:</span>
+                    <span class="stat-value" id="timer">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">难度:</span>
+                    <select id="difficulty">
+                        <option value="beginner">初级 (9×9, 10雷)</option>
+                        <option value="intermediate">中级 (16×16, 40雷)</option>
+                        <option value="expert">高级 (30×16, 99雷)</option>
+                        <option value="custom">自定义</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-controls">
+            <button id="new-game" class="control-btn">新游戏</button>
+            <button id="show-achievements" class="control-btn">成就</button>
+            <button id="show-settings" class="control-btn">设置</button>
+        </div>
+
+        <div class="game-board-container">
+            <div class="game-board" id="game-board"></div>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">已玩游戏:</span>
+                <span class="info-value" id="games-played">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">胜率:</span>
+                <span class="info-value" id="win-rate">0%</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">最快时间:</span>
+                <span class="info-value" id="best-time">--</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成就弹窗 -->
+    <div class="modal" id="achievements-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>成就系统</h2>
+                <span class="close" id="close-achievements">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="achievements-list" id="achievements-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>游戏设置</h2>
+                <span class="close" id="close-settings">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <h3>自定义难度</h3>
+                    <div class="setting-item">
+                        <label for="custom-width">宽度:</label>
+                        <input type="number" id="custom-width" min="5" max="50" value="9">
+                    </div>
+                    <div class="setting-item">
+                        <label for="custom-height">高度:</label>
+                        <input type="number" id="custom-height" min="5" max="50" value="9">
+                    </div>
+                    <div class="setting-item">
+                        <label for="custom-mines">地雷数:</label>
+                        <input type="number" id="custom-mines" min="1" max="500" value="10">
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>游戏选项</h3>
+                    <div class="setting-item">
+                        <input type="checkbox" id="enable-sound" checked>
+                        <label for="enable-sound">启用音效</label>
+                    </div>
+                    <div class="setting-item">
+                        <input type="checkbox" id="enable-animations" checked>
+                        <label for="enable-animations">启用动画</label>
+                    </div>
+                </div>
+                <div class="setting-actions">
+                    <button id="save-settings" class="control-btn">保存设置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏结束弹窗 -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="game-over-title">游戏结束</h2>
+                <span class="close" id="close-game-over">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="game-over-message"></p>
+                <div class="game-over-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">用时:</span>
+                        <span class="stat-value" id="final-time">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">难度:</span>
+                        <span class="stat-value" id="final-difficulty"></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="play-again" class="control-btn">再玩一次</button>
+                    <button id="back-to-menu" class="control-btn">返回菜单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/StorageManager.js"></script>
+    <script src="js/AchievementSystem.js"></script>
+    <script src="js/GameEngine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
