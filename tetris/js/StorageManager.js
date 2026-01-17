@@ -1,55 +1,8 @@
-class StorageManager {
+// 俄罗斯方块存储管理器 - StorageManager.js
+// 继承自公共 StorageManager 类
+class TetrisStorageManager extends StorageManager {
     constructor() {
-        this.prefix = 'tetris_';
-    }
-
-    save(key, data) {
-        try {
-            const serializedData = JSON.stringify(data);
-            localStorage.setItem(this.prefix + key, serializedData);
-            return true;
-        } catch (error) {
-            console.error('保存数据失败:', error);
-            return false;
-        }
-    }
-
-    load(key, defaultValue = null) {
-        try {
-            const serializedData = localStorage.getItem(this.prefix + key);
-            if (serializedData === null) {
-                return defaultValue;
-            }
-            return JSON.parse(serializedData);
-        } catch (error) {
-            console.error('加载数据失败:', error);
-            return defaultValue;
-        }
-    }
-
-    remove(key) {
-        try {
-            localStorage.removeItem(this.prefix + key);
-            return true;
-        } catch (error) {
-            console.error('删除数据失败:', error);
-            return false;
-        }
-    }
-
-    clear() {
-        try {
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith(this.prefix)) {
-                    localStorage.removeItem(key);
-                }
-            }
-            return true;
-        } catch (error) {
-            console.error('清空数据失败:', error);
-            return false;
-        }
+        super('tetris');
     }
 
     // 保存游戏状态
@@ -102,3 +55,6 @@ class StorageManager {
         });
     }
 }
+
+// 全局实例
+window.storageManager = new TetrisStorageManager();

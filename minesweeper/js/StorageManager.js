@@ -1,8 +1,8 @@
-class StorageManager {
+// 扫雷游戏存储管理器 - StorageManager.js
+// 继承自公共 StorageManager 类
+class MinesweeperStorageManager extends StorageManager {
     constructor() {
-        this.storageKey = 'minesweeper_game_data';
-        this.settingsKey = 'minesweeper_settings';
-        this.achievementsKey = 'minesweeper_achievements';
+        super('minesweeper');
     }
 
     // 保存游戏数据
@@ -10,7 +10,7 @@ class StorageManager {
         try {
             const gameData = this.getGameData();
             const updatedData = { ...gameData, ...data };
-            localStorage.setItem(this.storageKey, JSON.stringify(updatedData));
+            this.save('game_data', updatedData);
         } catch (error) {
             console.error('保存游戏数据失败:', error);
         }
@@ -19,8 +19,8 @@ class StorageManager {
     // 获取游戏数据
     getGameData() {
         try {
-            const data = localStorage.getItem(this.storageKey);
-            return data ? JSON.parse(data) : {
+            const data = this.load('game_data');
+            return data ? data : {
                 gamesPlayed: 0,
                 gamesWon: 0,
                 bestTimes: {
@@ -48,7 +48,7 @@ class StorageManager {
     // 保存设置
     saveSettings(settings) {
         try {
-            localStorage.setItem(this.settingsKey, JSON.stringify(settings));
+            this.save('settings', settings);
         } catch (error) {
             console.error('保存设置失败:', error);
         }
@@ -57,8 +57,8 @@ class StorageManager {
     // 获取设置
     getSettings() {
         try {
-            const settings = localStorage.getItem(this.settingsKey);
-            return settings ? JSON.parse(settings) : {
+            const settings = this.load('settings');
+            return settings ? settings : {
                 enableSound: true,
                 enableAnimations: true,
                 customDifficulty: {
@@ -84,7 +84,7 @@ class StorageManager {
     // 保存成就
     saveAchievements(achievements) {
         try {
-            localStorage.setItem(this.achievementsKey, JSON.stringify(achievements));
+            this.save('achievements', achievements);
         } catch (error) {
             console.error('保存成就失败:', error);
         }
@@ -93,8 +93,8 @@ class StorageManager {
     // 获取成就
     getAchievements() {
         try {
-            const achievements = localStorage.getItem(this.achievementsKey);
-            return achievements ? JSON.parse(achievements) : {};
+            const achievements = this.load('achievements');
+            return achievements ? achievements : {};
         } catch (error) {
             console.error('获取成就失败:', error);
             return {};
@@ -104,9 +104,9 @@ class StorageManager {
     // 重置所有数据
     resetAllData() {
         try {
-            localStorage.removeItem(this.storageKey);
-            localStorage.removeItem(this.settingsKey);
-            localStorage.removeItem(this.achievementsKey);
+            this.remove('game_data');
+            this.remove('settings');
+            this.remove('achievements');
             return true;
         } catch (error) {
             console.error('重置数据失败:', error);
@@ -140,3 +140,6 @@ class StorageManager {
         return Math.round((gameData.gamesWon / gameData.gamesPlayed) * 100);
     }
 }
+
+// 全局实例
+window.storageManager = new MinesweeperStorageManager();

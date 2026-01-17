@@ -1,21 +1,15 @@
 // 存储管理器 - StorageManager.js
-class StorageManager {
+// 继承自公共 StorageManager 类
+class GuessNumberStorageManager extends StorageManager {
     constructor() {
-        this.storageKeys = {
-            playerData: "guessNumber_playerData_v2",
-            gameHistory: "guessNumber_gameHistory",
-            achievements: "guessNumber_achievements",
-            settings: "guessNumber_settings",
-            currentGame: "guessNumber_currentGame"
-        };
-        
+        super('guessNumber');
         this.initStorage();
     }
     
     // 初始化存储
     initStorage() {
         // 初始化玩家数据
-        if (!localStorage.getItem(this.storageKeys.playerData)) {
+        if (!this.load('playerData')) {
             const defaultPlayerData = {
                 playerId: Date.now().toString(),
                 stats: {
@@ -36,7 +30,7 @@ class StorageManager {
         }
         
         // 初始化游戏历史
-        if (!localStorage.getItem(this.storageKeys.gameHistory)) {
+        if (!this.load('gameHistory')) {
             this.saveGameHistory([]);
         }
     }
@@ -44,14 +38,14 @@ class StorageManager {
     // 保存玩家数据
     savePlayerData(playerData) {
         playerData.lastGameTime = Date.now();
-        localStorage.setItem(this.storageKeys.playerData, JSON.stringify(playerData));
+        this.save('playerData', playerData);
     }
     
     // 加载玩家数据
     loadPlayerData() {
-        const playerData = localStorage.getItem(this.storageKeys.playerData);
+        const playerData = this.load('playerData');
         if (playerData) {
-            return JSON.parse(playerData);
+            return playerData;
         }
         return this.getDefaultsPlayerData();
     }
@@ -115,16 +109,12 @@ class StorageManager {
     
     // 保存游戏历史
     saveGameHistory(gameHistory) {
-        localStorage.setItem(this.storageKeys.gameHistory, JSON.stringify(gameHistory));
+        this.save('gameHistory', gameHistory);
     }
     
     // 加载游戏历史
     loadGameHistory() {
-        const gameHistory = localStorage.getItem(this.storageKeys.gameHistory);
-        if (gameHistory) {
-            return JSON.parse(gameHistory);
-        }
-        return [];
+        return this.load('gameHistory', []);
     }
     
     // 更新玩家统计数据
@@ -266,21 +256,17 @@ class StorageManager {
     
     // 保存当前游戏
     saveCurrentGame(gameState) {
-        localStorage.setItem(this.storageKeys.currentGame, JSON.stringify(gameState));
+        this.save('currentGame', gameState);
     }
     
     // 加载当前游戏
     loadCurrentGame() {
-        const currentGame = localStorage.getItem(this.storageKeys.currentGame);
-        if (currentGame) {
-            return JSON.parse(currentGame);
-        }
-        return null;
+        return this.load('currentGame', null);
     }
     
     // 清除当前游戏
     clearCurrentGame() {
-        localStorage.removeItem(this.storageKeys.currentGame);
+        this.remove('currentGame');
     }
     
     // 导出玩家数据
@@ -333,27 +319,23 @@ class StorageManager {
     
     // 保存成就状态
     saveAchievements(achievements) {
-        localStorage.setItem(this.storageKeys.achievements, JSON.stringify(achievements));
+        this.save('achievements', achievements);
     }
     
     // 加载成就状态
     loadAchievements() {
-        const achievements = localStorage.getItem(this.storageKeys.achievements);
-        if (achievements) {
-            return JSON.parse(achievements);
-        }
-        return null;
+        return this.load('achievements', null);
     }
     
     // 重置所有数据
     resetAllData() {
-        localStorage.removeItem(this.storageKeys.playerData);
-        localStorage.removeItem(this.storageKeys.gameHistory);
-        localStorage.removeItem(this.storageKeys.achievements);
-        localStorage.removeItem(this.storageKeys.currentGame);
+        this.remove('playerData');
+        this.remove('gameHistory');
+        this.remove('achievements');
+        this.remove('currentGame');
         this.initStorage();
     }
 }
 
 // 全局实例
-window.storageManager = new StorageManager();
+window.storageManager = new GuessNumberStorageManager();

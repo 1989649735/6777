@@ -118,6 +118,31 @@ body {
     background: #f7fafc;
     border-radius: 12px;
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    max-height: 600px;
+    max-width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: #667eea #e2e8f0;
+}
+
+.game-board-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.game-board-container::-webkit-scrollbar-track {
+    background: #e2e8f0;
+    border-radius: 4px;
+}
+
+.game-board-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.game-board-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
 }
 
 .game-board {
@@ -126,83 +151,197 @@ body {
     background: #e2e8f0;
     padding: 10px;
     border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 动态单元格大小 - 根据难度自动调整 */
+.game-board.beginner .cell {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.game-board.intermediate .cell {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+}
+
+.game-board.expert .cell {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+}
+
+.game-board.custom .cell {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
 }
 
 .cell {
-    width: 30px;
-    height: 30px;
     background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
     border: 2px solid #cbd5e0;
-    border-radius: 4px;
+    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 14px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     user-select: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+}
+
+.cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
 .cell:hover {
     background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
-    transform: scale(1.05);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cell:hover::before {
+    opacity: 0.6;
+}
+
+.cell:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .cell.revealed {
     background: #ffffff;
     border-color: #a0aec0;
     cursor: default;
-    transform: scale(1);
-    animation: revealCell 0.3s ease;
+    transform: scale(1) rotateX(0deg);
+    animation: revealCell 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes revealCell {
-    from {
-        transform: scale(1.1);
-        opacity: 0.8;
+    0% {
+        transform: scale(1.15) rotateX(45deg);
+        opacity: 0.7;
     }
-    to {
-        transform: scale(1);
+    50% {
+        transform: scale(0.95) rotateX(-10deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1) rotateX(0deg);
         opacity: 1;
     }
 }
 
+.cell.revealed::before {
+    opacity: 0;
+}
+
 .cell.flagged {
     background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
-    animation: flagCell 0.3s ease;
+    border-color: #fc8181;
+    animation: flagCell 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 12px rgba(252, 129, 129, 0.3);
 }
 
 @keyframes flagCell {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(1);
     }
-    50% {
-        transform: rotate(10deg);
+    30% {
+        transform: rotate(15deg) scale(1.1);
+    }
+    60% {
+        transform: rotate(-8deg) scale(1.05);
     }
     100% {
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(1);
     }
 }
 
 .cell.mine {
     background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
-    animation: mineExplode 0.5s ease;
+    border-color: #e53e3e;
+    animation: mineExplode 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 8px 16px rgba(245, 101, 101, 0.4);
 }
 
 @keyframes mineExplode {
     0% {
-        transform: scale(1);
+        transform: scale(1) rotateY(0deg);
     }
-    50% {
-        transform: scale(1.3);
+    30% {
+        transform: scale(1.4) rotateY(90deg);
+        opacity: 0.9;
+    }
+    60% {
+        transform: scale(1.2) rotateY(180deg);
         opacity: 0.8;
     }
     100% {
-        transform: scale(1);
+        transform: scale(1) rotateY(0deg);
         opacity: 1;
     }
+}
+
+/* 胜利时的庆祝动画 */
+.cell.win {
+    animation: winCell 0.6s ease-in-out;
+}
+
+@keyframes winCell {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2) rotate(5deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+    75% {
+        transform: scale(1.2) rotate(3deg);
+    }
+}
+
+/* 游戏加载动画 */
+.game-board.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.game-board.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .cell.mine::after {

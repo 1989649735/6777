@@ -47,10 +47,19 @@ class GameEngine {
             this.gameState.mines = config.mines;
         }
         
+        // 显示加载动画
+        this.boardElement.classList.add('loading');
+        
         this.resetGame();
-        this.generateBoard();
-        this.renderBoard();
-        this.updateUI();
+        
+        // 使用setTimeout创建加载延迟，增强用户体验
+        setTimeout(() => {
+            this.generateBoard();
+            this.renderBoard();
+            this.updateUI();
+            // 移除加载动画
+            this.boardElement.classList.remove('loading');
+        }, 300);
     }
 
     // 重置游戏
@@ -144,8 +153,9 @@ class GameEngine {
 
     // 渲染游戏板
     renderBoard() {
-        const { width, height } = this.gameState;
+        const { width, height, difficulty } = this.gameState;
         this.boardElement.innerHTML = '';
+        this.boardElement.className = `game-board ${difficulty}`;
         this.boardElement.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
         this.boardElement.style.gridTemplateRows = `repeat(${height}, 1fr)`;
         
@@ -307,6 +317,18 @@ class GameEngine {
                     }
                 }
             }
+        } else {
+            // 胜利时添加庆祝动画
+            setTimeout(() => {
+                for (let y = 0; y < this.gameState.height; y++) {
+                    for (let x = 0; x < this.gameState.width; x++) {
+                        const cellElement = this.boardElement.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+                        if (cellElement) {
+                            cellElement.classList.add('win');
+                        }
+                    }
+                }
+            }, 100);
         }
         
         this.updateUI();
